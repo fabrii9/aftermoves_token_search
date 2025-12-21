@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2025 Aftermoves
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    
+    <!-- Extiende el formulario de ir.model para agregar token_search_enabled -->
+    <!-- Compatible con base_name_search_improved si está instalado -->
+    <record id="view_model_form_token_search" model="ir.ui.view">
+        <field name="name">ir.model.form.token.search</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Intentar agregar después del campo model si existe -->
+            <xpath expr="//field[@name='model']" position="after">
+                <field 
+                    name="token_search_enabled" 
+                    widget="boolean_toggle"
+                    string="Token Search"
+                />
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- También agregar a la vista de lista si existe -->
+    <record id="view_model_list_token_search" model="ir.ui.view">
+        <field name="name">ir.model.list.token.search</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_tree"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='name']" position="after">
+                <field 
+                    name="token_search_enabled" 
+                    widget="boolean_toggle"
+                    optional="hide"
+                />
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>
