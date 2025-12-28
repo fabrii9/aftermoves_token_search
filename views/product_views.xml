@@ -41,11 +41,23 @@
         </field>
     </record>
 
-    <!-- 
-        NOTA: La vista de catálogo (product_view_kanban_catalog) usa la misma
-        vista de búsqueda que product.product (product_search_form_view),
-        por lo que el campo token_search ya está disponible allí.
-        No es necesario crear una herencia separada.
-    -->
+    <!-- Agregar campo token_search a la vista de búsqueda del CATÁLOGO -->
+    <record id="product_catalog_search_token_search" model="ir.ui.view">
+        <field name="name">product.catalog.search.token.search</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_view_search_catalog"/>
+        <field name="arch" type="xml">
+            
+            <!-- Agregar el campo token_search al principio de la búsqueda -->
+            <xpath expr="//search/field[@name='name']" position="before">
+                <field 
+                    name="token_search" 
+                    string="Búsqueda Inteligente (tokens)"
+                    filter_domain="[('token_search', 'ilike', self)]"
+                />
+            </xpath>
+            
+        </field>
+    </record>
 
 </odoo>
