@@ -12,12 +12,19 @@
     "depends": [
         "base",
         "product",  # Para aplicar a productos
+        "web",      # Para los assets JavaScript
     ],
     "data": [
         "data/ir_config_parameter.xml",
         "views/ir_model_views.xml",
         "views/product_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "aftermoves_token_search/static/src/js/intelligent_search_widget.js",
+            "aftermoves_token_search/static/src/css/intelligent_search.css",
+        ],
+    },
     "installable": True,
     "application": False,
     "auto_install": False,

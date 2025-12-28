@@ -1,0 +1,133 @@
+/* Estilos para la búsqueda inteligente incremental */
+
+/* Container de tokens acumulados */
+.o_intelligent_search_tokens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+/* Chip individual de token */
+.o_intelligent_search_token {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.o_intelligent_search_token:hover {
+    background-color: #0056b3;
+}
+
+/* Botón para remover token */
+.o_intelligent_search_token .o_remove_token {
+    margin-left: 6px;
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 2px;
+    transition: opacity 0.2s ease;
+}
+
+.o_intelligent_search_token .o_remove_token:hover {
+    opacity: 1;
+}
+
+/* Label descriptivo */
+.o_intelligent_search_label {
+    font-size: 12px;
+    color: #6c757d;
+    margin-right: 8px;
+    font-weight: 500;
+}
+
+/* Botón para limpiar todos los tokens */
+.o_intelligent_search_clear {
+    cursor: pointer;
+    color: #dc3545;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.o_intelligent_search_clear:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Indicador visual cuando la búsqueda inteligente está activa */
+.o_searchview.o_intelligent_search_active .o_searchview_input_container {
+    border-left: 3px solid #007bff;
+}
+
+/* Mensaje de ayuda */
+.o_intelligent_search_help {
+    font-size: 11px;
+    color: #6c757d;
+    font-style: italic;
+    padding: 2px 8px;
+}
+
+/* Ajustes para el facet de búsqueda inteligente */
+.o_searchview .o_facet_values .o_intelligent_facet_value {
+    background-color: #e7f3ff;
+    border-color: #007bff;
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* Icono de información */
+.o_intelligent_search_icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+/* Animación de entrada para tokens */
+@keyframes tokenFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.o_intelligent_search_token {
+    animation: tokenFadeIn 0.2s ease;
+}
+
+/* Modo responsive */
+@media (max-width: 768px) {
+    .o_intelligent_search_tokens {
+        gap: 4px;
+        padding: 4px 6px;
+    }
+    
+    .o_intelligent_search_token {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+}
