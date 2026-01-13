@@ -13,6 +13,7 @@
         "base",
         "product",  # Para aplicar a productos
         "web",      # Para los assets JavaScript
+        "point_of_sale",  # Para integración con POS
     ],
     "data": [
         "data/ir_config_parameter.xml",
@@ -23,6 +24,9 @@
         "web.assets_backend": [
             "aftermoves_token_search/static/src/js/intelligent_search_widget.js",
             "aftermoves_token_search/static/src/css/intelligent_search.css",
+        ],
+        "point_of_sale._assets_pos": [
+            "aftermoves_token_search/static/src/app/search_bar_patch.js",
         ],
     },
     "installable": True,
