@@ -37,7 +37,7 @@ Permite encontrar registros mediante palabras sueltas (tokens) sin necesidad de 
   - Global: `aftermoves.token_search_enabled` (default: True)
   - Por modelo: campo `token_search_enabled` en ir.model
 - ✅ **Sin dependencias extras**: Solo Python stdlib + Odoo base
-- ✅ **Aplicado a**: `product.template`, `product.product`
+- ✅ **Aplicado a**: `product.template`, `product.product`, `sale.order`
 - ✅ **Extensible**: Fácil de aplicar a otros modelos (res.partner, sale.order, etc.)
 
 ## 📦 Instalación
@@ -249,7 +249,7 @@ Desarrollado por **Aftermoves**
 - Búsqueda por tokens con normalización (sin acentos, lowercase)
 - Feature flags global y por modelo
 - Mixin reutilizable para cualquier modelo
-- Aplicado a `product.template` y `product.product`
+- Aplicado a `product.template`, `product.product` y `sale.order`
 - Filtro de búsqueda en vistas de producto
 - Documentación completa
 

@@ -14,7 +14,7 @@ class ProductProduct(models.Model):
     _inherit = ["product.product", "token.search.mixin"]
     
     # Campos donde buscar tokens
-    _token_search_fields = ["name", "default_code"]
+    _token_search_fields = ["name", "default_code", "barcode"]
     
     # Configuración específica para productos
     _token_min_length = 1  # Acepta tokens desde 1 char (incluye números como "70")

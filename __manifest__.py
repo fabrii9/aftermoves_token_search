@@ -12,6 +12,7 @@
     "depends": [
         "base",
         "product",  # Para aplicar a productos
+        "sale",     # Para aplicar a presupuestos de venta
         "web",      # Para los assets JavaScript
         "point_of_sale",  # Para integración con POS
     ],
@@ -19,6 +20,7 @@
         "data/ir_config_parameter.xml",
         "views/ir_model_views.xml",
         "views/product_views.xml",
+        "views/sale_order_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

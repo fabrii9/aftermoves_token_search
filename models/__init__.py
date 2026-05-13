@@ -5,4 +5,5 @@ from . import token_search_mixin
 from . import ir_model
 from . import product_template
 from . import product_product
+from . import sale_order
 from . import pos_session
