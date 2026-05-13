@@ -39,6 +39,7 @@ class TokenSearchMixin(models.AbstractModel):
     _token_search_fields = None  # Lista de campos donde buscar. Si None, usa _rec_names
     _token_min_length = 2  # Tokens más cortos se ignoran
     _token_max_count = 6  # Máximo de tokens a procesar
+    _token_min_count = 2  # Mínimo de tokens para activar la búsqueda
     
     def _compute_token_search(self):
         """Campo virtual, no tiene valor real"""
@@ -283,9 +284,9 @@ class TokenSearchMixin(models.AbstractModel):
                 max_count=self._token_max_count
             )
             
-            # Si no hay tokens válidos o solo hay 1, no aplicar
+            # Si no hay suficientes tokens, no aplicar
             # (la búsqueda estándar ya lo hizo)
-            if len(tokens) < 2:
+            if len(tokens) < self._token_min_count:
                 return original_results
             
             _logger.debug(

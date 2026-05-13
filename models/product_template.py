@@ -19,3 +19,4 @@ class ProductTemplate(models.Model):
     # Configuración específica para productos
     _token_min_length = 1  # Acepta tokens desde 1 char (incluye números como "70")
     _token_max_count = 8  # Máximo 8 tokens por búsqueda
+    _token_min_count = 1  # Se activa con 1 token (útil para búsqueda parcial de barcode)
