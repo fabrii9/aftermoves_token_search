@@ -242,28 +242,19 @@ class TokenSearchMixin(models.AbstractModel):
         
         return final_domain
     
-    @api.model
-    def name_search(self, name="", args=None, operator="ilike", limit=100):
+    def _apply_token_search(self, name, args, operator, limit, original_results):
         """
-        Override de name_search que agrega búsqueda por tokens.
-        
-        Comportamiento:
-        1. Ejecuta búsqueda estándar (super) primero
-        2. Si hay suficientes resultados, retorna directamente
-        3. Si no, intenta búsqueda por tokens
-        4. Combina resultados sin duplicados
+        Aplica búsqueda por tokens a resultados ya obtenidos.
+        Este método puede ser llamado desde modelos que sobreescriben name_search
+        y no pueden confiar en super() para llegar al mixin.
         
         :param name: Texto de búsqueda
         :param args: Dominio adicional
-        :param operator: Operador de búsqueda (solo funciona con 'ilike' o 'like')
+        :param operator: Operador de búsqueda
         :param limit: Límite de resultados
-        :return: Lista de tuplas (id, display_name)
+        :param original_results: Resultados de la búsqueda estándar
+        :return: Lista de tuplas combinadas
         """
-        # Ejecutar búsqueda estándar primero (respeta base_name_search_improved)
-        original_results = super().name_search(
-            name=name, args=args, operator=operator, limit=limit
-        )
-        
         # Si no hay nombre o ya tenemos suficientes resultados, retornar
         if not name or (limit and len(original_results) >= limit):
             return original_results
@@ -285,7 +276,6 @@ class TokenSearchMixin(models.AbstractModel):
             )
             
             # Si no hay suficientes tokens, no aplicar
-            # (la búsqueda estándar ya lo hizo)
             if len(tokens) < self._token_min_count:
                 return original_results
             
@@ -344,3 +334,27 @@ class TokenSearchMixin(models.AbstractModel):
             )
         
         return original_results
+
+    @api.model
+    def name_search(self, name="", args=None, operator="ilike", limit=100):
+        """
+        Override de name_search que agrega búsqueda por tokens.
+        
+        Comportamiento:
+        1. Ejecuta búsqueda estándar (super) primero
+        2. Si hay suficientes resultados, retorna directamente
+        3. Si no, intenta búsqueda por tokens
+        4. Combina resultados sin duplicados
+        
+        :param name: Texto de búsqueda
+        :param args: Dominio adicional
+        :param operator: Operador de búsqueda (solo funciona con 'ilike' o 'like')
+        :param limit: Límite de resultados
+        :return: Lista de tuplas (id, display_name)
+        """
+        # Ejecutar búsqueda estándar primero (respeta base_name_search_improved)
+        original_results = super().name_search(
+            name=name, args=args, operator=operator, limit=limit
+        )
+        
+        return self._apply_token_search(name, args, operator, limit, original_results)
