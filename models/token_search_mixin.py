@@ -92,11 +92,18 @@ class TokenSearchMixin(models.AbstractModel):
         # Lowercase
         text = text.lower()
         
+        # Proteger la "ñ" antes de descomponer acentos, para que no se
+        # convierta en "n" al filtrar marcas diacríticas.
+        text = text.replace('ñ', '__AFTERM_N_TILDE__')
+
         # Remover acentos usando unicodedata
         # NFD = Canonical Decomposition
         # Filtra caracteres de categoría Mn (Nonspacing_Mark)
         text = unicodedata.normalize('NFD', text)
         text = ''.join(char for char in text if unicodedata.category(char) != 'Mn')
+
+        # Restaurar la "ñ" original
+        text = text.replace('__AFTERM_N_TILDE__', 'ñ')
         
         # Reemplazar puntuación y caracteres especiales por espacios
         # Mantiene solo letras, números y espacios
